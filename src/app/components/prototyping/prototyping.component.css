@@ -1,0 +1,57 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+#div {
+  width: 500px;
+  height: 500px;
+  border: 1px solid black;
+}
+.linha {
+  margin-top: 10px;
+  width: 5px;
+  height: 100px;
+  background-color: black;
+  position: absolute;
+}
+
+.nav-bar {
+  width: 100px;
+  height: 100%;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#verdical {
+    margin-top: 10px;
+    display: none;
+}
+#horizontal {
+    margin-top: 10px;
+    display: none;
+    top: 120px;
+    position: absolute;
+
+}
+.line-horizontal{
+    margin-top: 10px;
+    top: 120px;
+  width: 70px;
+  height: 5px;
+  background-color: black;
+  position: absolute;
+}
+.genericLoad{
+    margin-top: 10px;
+    top: 160px;
+  position: absolute;
+}
+#genericLoad{
+    position: absolute;
+    display: none;
+    top: 160px;
+    margin-top: 10px;
+}
