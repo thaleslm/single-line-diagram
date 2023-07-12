@@ -17,16 +17,86 @@
       class="line-horizontal"
       (dragstart)="handleDragStart($event, Hline)"
     ></div>
-    <button id="genericLoad" (click)="addLines('genericLoad')">mais</button>
 
+    <button id="genericLoad" (click)="addLines('genericLoad')">mais</button>
     <img
       *ngFor="let gLoada of genericLoad; let index"
       [id]="gLoada"
       class="genericLoad"
-      src="assets/unifilar_carga_generica.svg"
-      width="50px"
-      height="50px"
+      src="assets/genericLoad.svg"
+      width="40px"
+      height="40px"
       (dragstart)="handleDragStart($event, gLoada)"
     />
+
+    <button id="key" (click)="addLines('key')">mais</button>
+    <img
+      *ngFor="let key of keys; let index"
+      [id]="key"
+      class="key"
+      src="assets/key.svg"
+      width="40px"
+      height="40px"
+      (dragstart)="handleDragStart($event, key)"
+    />
+
+
+    <button id="transformer" (click)="addLines('transformer')">mais</button>
+    <img
+      *ngFor="let transformer of transformers; let index"
+      [id]="transformer"
+      class="transformer"
+      src="assets/transformer.svg"
+      width="40px"
+      height="40px"
+      (dragstart)="handleDragStart($event, transformer)"
+    />
+    <button id="exitPoint" (click)="addLines('exitPoint')">mais</button>
+    <img
+      *ngFor="let exitPoint of exitPoints; let index"
+      [id]="exitPoint"
+      class="exitPoint"
+      src="assets/exitPoint.svg"
+      width="40px"
+      height="40px"
+      (dragstart)="handleDragStart($event, exitPoint)"
+    />
+
+    <button id="entryPoint" (click)="addLines('entryPoint')">mais</button>
+    <img
+      *ngFor="let entryPoint of entryPoints; let index"
+      [id]="entryPoint"
+      class="entryPoint"
+      src="assets/entryPoint.svg"
+      width="40px"
+      height="40px"
+      (dragstart)="handleDragStart($event, entryPoint)"
+    />
+
+    <button id="circuitBreaker" (click)="addLines('circuitBreaker')">mais</button>
+    <img
+      *ngFor="let circuitBreaker of circuitBreakers; let index"
+      [id]="circuitBreaker"
+      class="circuitBreaker"
+      src="assets/circuitBreaker.svg"
+      width="40px"
+      height="40px"
+      (dragstart)="handleDragStart($event, circuitBreaker)"
+    />
+
+    <button id="feeder" (click)="addLines('feeder')">mais</button>
+    <img
+      *ngFor="let feeder of feeders; let index"
+      [id]="feeder"
+      class="feeder"
+      src="assets/feeder.svg"
+      width="40px"
+      height="40px"
+      (dragstart)="handleDragStart($event, feeder)"
+    />
+
+
+
   </div>
+  
 </div>
