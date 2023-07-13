@@ -36,3 +36,10 @@ export const Propreties = {
     buttonType: 'feeder',
   },
 };
+
+export const cable = {
+  codId: 'cable',
+  montante:'id',
+  jusante: 'id',
+
+}

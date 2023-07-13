@@ -6,6 +6,7 @@ import { PrototypingComponent } from './components/prototyping/prototyping.compo
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { SelectComponent } from './components/modal/select/select.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import { SelectComponent } from './components/modal/select/select.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     MatDialogModule,
-
+    ReactiveFormsModule
     
   ],
   providers: [],

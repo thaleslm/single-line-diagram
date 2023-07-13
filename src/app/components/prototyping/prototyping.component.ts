@@ -16,13 +16,6 @@ export class PrototypingComponent {
     console.log(this.propertiesData);
   }
 
-  openDialog() {
-    const config = new MatDialogConfig();
-    config.height = 'auto';
-    config.width = 'auto';
-
-    const dialog = this.dialog.open(SelectComponent, config);
-  }
 
   handleDragStart(event: DragEvent, id: string) {
     event.dataTransfer?.setData('text/plain', '');
@@ -65,19 +58,20 @@ export class PrototypingComponent {
         if(this.id[0] == this.propertiesData[prop].array[0]){
           console.log(prop)
           this.displayButton('block',this.propertiesData[prop].buttonType)
+          this.openDialog(this.propertiesData[prop].array)
         }
       }
-      // if (this.id[0] == 'v') this.displayButton('block', 'linesVerdical');
-      // if (this.id[0] == 'h') this.displayButton('block', 'linesHorizontal');
-      // if (this.id[0] == 'g') this.displayButton('block', 'genericLoad');
-      // if (this.id[0] == 'k') this.displayButton('block', 'key');
-      // if (this.id[0] == 't') this.displayButton('block', 'transformer');
-      // if (this.id[0] == 'e') this.displayButton('block', 'exitPoint');
-      // if (this.id[0] == 'p') this.displayButton('block', 'entryPoint');
-      // if (this.id[0] == 'c') this.displayButton('block', 'circuitBreaker');
-      // if (this.id[0] == 'f') this.displayButton('block', 'feeder');
-      // this.openDialog();
     }
+  }
+
+
+  openDialog(value: any) {
+    const config = new MatDialogConfig();
+    config.height = '200px';
+    config.width = '350px';
+    config.panelClass ='custom-dialog';
+    const dialog = this.dialog.open(SelectComponent, config);
+    dialog.componentInstance.data = value;
   }
 }
 

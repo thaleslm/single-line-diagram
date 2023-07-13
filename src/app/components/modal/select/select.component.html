@@ -1,1 +1,14 @@
-<p>select works!</p>
+<body>
+<header> <div>Cadastro</div> <button>x</button></header>
+    <form [formGroup]="form">
+        <label for="">
+            CodId <br>
+            <input type="text" formControlName="codId">
+        </label>
+        <label for="">
+            CodId <br>
+            <input type="text">
+        </label>
+        <button (click)="onSubmit()"> confirmar </button> 
+    </form>
+</body>
