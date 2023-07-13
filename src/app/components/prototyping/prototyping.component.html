@@ -1,17 +1,17 @@
 <div id="div" (dragover)="allowDrop($event)" (drop)="handleDrop($event)">
   <div class="nav-bar">
-    <button id="verdical" (click)="addLines('linesVerdical')">mais</button>
+    <button id="linesVertical" (click)="addLines('linesVertical')">mais</button>
     <div
-      *ngFor="let line of linesVertical; let index"
+      *ngFor="let line of propertiesData.linesVertical.array; let index"
       [id]="line"
       draggable="true"
       class="linha"
       (dragstart)="handleDragStart($event, line)"
     ></div>
-    <button id="horizontal" (click)="addLines('linesHorizontal')">mais</button>
+    <button id="linesHorizontal" (click)="addLines('linesHorizontal')">mais</button>
 
     <div
-      *ngFor="let Hline of linesHorizontal; let index"
+      *ngFor="let Hline of propertiesData.linesHorizontal.array; let index"
       [id]="Hline"
       draggable="true"
       class="line-horizontal"
@@ -20,7 +20,7 @@
 
     <button id="genericLoad" (click)="addLines('genericLoad')">mais</button>
     <img
-      *ngFor="let gLoada of genericLoad; let index"
+      *ngFor="let gLoada of propertiesData.genericLoad.array; let index"
       [id]="gLoada"
       class="genericLoad"
       src="assets/genericLoad.svg"
@@ -31,19 +31,19 @@
 
     <button id="key" (click)="addLines('key')">mais</button>
     <img
-      *ngFor="let key of keys; let index"
-      [id]="key"
+      *ngFor="let k of propertiesData.key.array; let index"
+      [id]="k"
       class="key"
       src="assets/key.svg"
       width="40px"
       height="40px"
-      (dragstart)="handleDragStart($event, key)"
+      (dragstart)="handleDragStart($event, k)"
     />
 
 
-    <button id="transformer" (click)="addLines('transformer')">mais</button>
+    <button id="transformers" (click)="addLines('transformers')">mais</button>
     <img
-      *ngFor="let transformer of transformers; let index"
+      *ngFor="let transformer of propertiesData.transformers.array; let index"
       [id]="transformer"
       class="transformer"
       src="assets/transformer.svg"
@@ -53,46 +53,46 @@
     />
     <button id="exitPoint" (click)="addLines('exitPoint')">mais</button>
     <img
-      *ngFor="let exitPoint of exitPoints; let index"
-      [id]="exitPoint"
+      *ngFor="let point of propertiesData.exitPoint.array; let index"
+      [id]="point"
       class="exitPoint"
       src="assets/exitPoint.svg"
       width="40px"
       height="40px"
-      (dragstart)="handleDragStart($event, exitPoint)"
+      (dragstart)="handleDragStart($event, point)"
     />
 
     <button id="entryPoint" (click)="addLines('entryPoint')">mais</button>
     <img
-      *ngFor="let entryPoint of entryPoints; let index"
-      [id]="entryPoint"
+      *ngFor="let point of propertiesData.entryPoint.array; let index"
+      [id]="point"
       class="entryPoint"
       src="assets/entryPoint.svg"
       width="40px"
       height="40px"
-      (dragstart)="handleDragStart($event, entryPoint)"
+      (dragstart)="handleDragStart($event, point)"
     />
 
     <button id="circuitBreaker" (click)="addLines('circuitBreaker')">mais</button>
     <img
-      *ngFor="let circuitBreaker of circuitBreakers; let index"
-      [id]="circuitBreaker"
+      *ngFor="let circuit of propertiesData.circuitBreaker.array; let index"
+      [id]="circuit"
       class="circuitBreaker"
       src="assets/circuitBreaker.svg"
       width="40px"
       height="40px"
-      (dragstart)="handleDragStart($event, circuitBreaker)"
+      (dragstart)="handleDragStart($event, circuit)"
     />
 
     <button id="feeder" (click)="addLines('feeder')">mais</button>
     <img
-      *ngFor="let feeder of feeders; let index"
-      [id]="feeder"
+      *ngFor="let fee of propertiesData.feeder.array; let index"
+      [id]="fee"
       class="feeder"
       src="assets/feeder.svg"
       width="40px"
       height="40px"
-      (dragstart)="handleDragStart($event, feeder)"
+      (dragstart)="handleDragStart($event, fee)"
     />
 
 
