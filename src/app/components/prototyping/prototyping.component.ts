@@ -11,23 +11,25 @@ export class PrototypingComponent {
   public propertiesData: any = Propreties;
 
   id: string = '0';
+  testSet: Array<any> = [];
+  index : number= 0;
 
   constructor(public dialog: MatDialog) {
     console.log(this.propertiesData);
   }
 
-
   handleDragStart(event: DragEvent, id: string) {
     event.dataTransfer?.setData('text/plain', '');
     event.dataTransfer?.setDragImage(event.target as HTMLElement, 0, 0);
     this.id = id;
-    console.log(id)
+    console.log(id);
   }
   addLines(type: string) {
     if (this.propertiesData.hasOwnProperty(type)) {
       const option = this.propertiesData[type];
       let index = option.array.length.toString();
       option.array.push(option.array[0] + index);
+
       this.displayButton('none', option.buttonType);
     } else {
       console.log('Objeto não encontrado');
@@ -54,24 +56,49 @@ export class PrototypingComponent {
       linha.style.left = offsetX + 'px';
       linha.style.top = offsetY + 'px';
 
-      for(let prop in this.propertiesData) {
-        if(this.id[0] == this.propertiesData[prop].array[0]){
-          console.log(prop)
-          this.displayButton('block',this.propertiesData[prop].buttonType)
-          this.openDialog(this.propertiesData[prop].array)
+      for (let prop in this.propertiesData) {
+        console.log(prop);
+        if (this.id[0] == this.propertiesData[prop].array[0]) {
+          this.displayButton('block', this.propertiesData[prop].buttonType);
+          this.propertiesData[prop].id = this.index
+          if(this.propertiesData[prop].id > 0){
+            this.propertiesData[prop].montante = this.index -1
+          }
+          this.index+=1
+          this.propertiesData[prop].jusante = this.index
+
+          this.openDialog(this.propertiesData[prop]);
+          console.log(this.propertiesData[prop]);
+
         }
       }
     }
   }
 
-
   openDialog(value: any) {
     const config = new MatDialogConfig();
     config.height = '200px';
     config.width = '350px';
-    config.panelClass ='custom-dialog';
+    config.panelClass = 'custom-dialog';
     const dialog = this.dialog.open(SelectComponent, config);
+    
     dialog.componentInstance.data = value;
+
+    dialog.afterClosed().subscribe((data) => {
+    
+      if(this.testSet.length > 0){
+        for(let i = 0; i< this.testSet.length; i++) {
+          if(this.testSet[i].idButton != data.idButton) {
+          this.testSet.push(data);
+          }
+        }
+
+      }else{
+        this.testSet.push(data);
+      }
+      // this.testSet.push(data);
+      console.log(this.testSet);
+    });
   }
 }
 

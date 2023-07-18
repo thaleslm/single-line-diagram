@@ -20,6 +20,8 @@ header {
   justify-content: space-between;
   height: 10%;
   width: 100%;
+  background-color: #5b80a7;
+  color:white;
 }
 header div ,header button{
     margin-inline: 10px;
@@ -28,4 +30,15 @@ header div ,header button{
 }
 ::ng-deep .custom-dialog .mat-dialog-container {
   padding: 0 !important;
+}
+
+button{
+  cursor: pointer;
+  background-color: #5b80a7;
+  border: none;
+  color:white;
+}
+form button {
+  height: 24px;
+  font-weight: 600;
 }

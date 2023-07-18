@@ -7,19 +7,22 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { SelectComponent } from './components/modal/select/select.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DragAndDropComponent } from './components/drag-and-drop/drag-and-drop.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
     AppComponent,
     PrototypingComponent,
-    SelectComponent
+    SelectComponent,
+    DragAndDropComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatDialogModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,DragDropModule
     
   ],
   providers: [],

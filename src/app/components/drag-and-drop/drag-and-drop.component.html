@@ -1,0 +1,27 @@
+<body class="example-boundary">
+  <img
+    cdkDragBoundary=".example-boundary"
+    *ngFor="let item of gridItems; let i = index"
+    class="example-box"
+    [src]="item.src"
+    cdkDrag
+    [cdkDragFreeDragPosition]="item"
+    (cdkDragEnded)="positions($event, item, i)"
+  />
+  <img
+    *ngFor="let element of GuardGrid; let i = index"
+    class="example-box"
+    style="position: absolute"
+    [src]="element.src"
+    cdkDrag
+    [cdkDragFreeDragPosition]="element"
+  />
+</body>
+
+<!-- <body class="example-boundary" >
+ 
+  <img *ngFor="let element of positionFinalized;let i=index" class="example-box" [src]="element.src" cdkDrag [cdkDragFreeDragPosition]="element" 
+  /> 
+
+  
+</body> -->
