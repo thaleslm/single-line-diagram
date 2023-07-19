@@ -18,10 +18,8 @@ interface ColumnItem {
   styleUrls: ['./drag-and-drop.component.css'],
 })
 export class DragAndDropComponent {
-
   constructor(private renderer: Renderer2) {
     this.initializeElement();
-
   }
 
   gridItems: Array<any> = [
@@ -32,12 +30,20 @@ export class DragAndDropComponent {
       y: 0,
       defaultX: -300,
       defaulty: 0,
-      class:'x',
+      class: 'x',
+      height: 50,
+      width: 50,
+      name: '',
+    },
+    {
+      id: 1,
+      src: 'assets/key.svg',
+      x: -240,
+      y: 0,
+      class: 'x',
       height: 50,
       width: 50,
     },
-    { id: 1, src: 'assets/key.svg', x: -240, y: 0,
-    class:'x', height: 50, width: 50 },
     {
       id: 2,
       src: 'assets/transformer.svg',
@@ -45,9 +51,10 @@ export class DragAndDropComponent {
       y: 0,
       defaultX: -180,
       defaulty: 0,
-      class:'x',
+      class: 'x',
       height: 50,
       width: 50,
+      name: '',
     },
     {
       id: 3,
@@ -56,10 +63,11 @@ export class DragAndDropComponent {
       y: 0,
       defaultX: -120,
       defaulty: 0,
-      
-      class:'x',
+
+      class: 'x',
       height: 50,
       width: 50,
+      name: '',
     },
     {
       id: 4,
@@ -68,9 +76,10 @@ export class DragAndDropComponent {
       y: 0,
       defaultX: -60,
       defaulty: 0,
-      class:'x',
+      class: 'x',
       height: 50,
       width: 50,
+      name: '',
     },
     {
       id: 5,
@@ -79,12 +88,21 @@ export class DragAndDropComponent {
       y: 0,
       defaultX: 0,
       defaulty: 0,
-      class:'x',
+      class: 'x',
       height: 50,
       width: 50,
+      name: '',
     },
-    { id: 6, src: 'assets/feeder.svg', x: 60, y: 0,
-    class:'x', height: 50, width: 50 },
+    {
+      id: 6,
+      src: 'assets/feeder.svg',
+      x: 60,
+      y: 0,
+      class: 'x',
+      height: 50,
+      width: 50,
+      name: '',
+    },
     {
       id: 7,
       src: 'assets/barra_horizontal.svg',
@@ -92,9 +110,11 @@ export class DragAndDropComponent {
       y: 20,
       defaultX: 120,
       defaulty: 20,
-      class:'l ',
+      class: 'l ',
       height: 10,
       width: 50,
+      name:''
+
     },
     {
       id: 8,
@@ -103,9 +123,11 @@ export class DragAndDropComponent {
       y: 0,
       defaultX: 180,
       defaulty: 0,
-      class:'l',
+      class: 'l',
       height: 51,
       width: 10,
+      name:''
+
     },
     {
       id: 9,
@@ -114,9 +136,11 @@ export class DragAndDropComponent {
       y: 20,
       defaultX: 240,
       defaulty: 20,
-      class:'l hori',
+      class: 'l hori',
       height: 5,
       width: 50,
+      name:''
+
     },
     {
       id: 10,
@@ -125,9 +149,11 @@ export class DragAndDropComponent {
       y: 0,
       defaultX: 300,
       defaulty: 0,
-      class:'l',
+      class: 'l',
       height: 51,
       width: 10,
+      name:''
+
     },
     {
       id: 11,
@@ -136,11 +162,17 @@ export class DragAndDropComponent {
       y: 0,
       defaultX: 340,
       defaulty: 0,
-      class:'l',
+      class: 'l',
       height: 50,
       width: 50,
+      name:''
+
     },
   ];
+
+  showAdditionalElement: boolean = false;
+  additionalElementLeft: number = 0;
+  additionalElementTop: number = 0;
 
   GuardGrid: Array<any> = [];
   changePosition() {}
@@ -158,15 +190,24 @@ export class DragAndDropComponent {
     const deltaX = absoluteX - relativeX;
     const deltaY = absoluteY - relativeY;
     this.gridItems[index] = {
-      x : item.defaultX,
-      y : item.defaulty,
-      ...item
-    }
+      x: item.defaultX,
+      y: item.defaulty,
+      ...item,
+    };
 
     item.x = deltaX;
     item.y = deltaY;
-    this.GuardGrid.push(item)
+    this.GuardGrid.push(item);
     //adicionar na primeira posição do objeto o outro com o mesmo caminho
+
+    if(item.id < 7){
+      this.additionalElementLeft = relativeX + 52;
+      this.additionalElementTop = relativeY + 20;
+  
+      this.showAdditionalElement = true;
+
+    }
+    // Definir a posição do elemento adicional
   }
 
   guardPosition(event: CdkDragEnd, item: any, index: number) {
@@ -209,6 +250,37 @@ export class DragAndDropComponent {
   clear() {
     window.localStorage.removeItem('gridItems');
   }
+  divWidth: number = 200;
+  divHeight: number = 200;
+  private isResizing: boolean = false;
+  private initialWidth: number = 0;
+  private initialHeight: number = 0;
+  private resizeStartX: number = 0;
+  private resizeStartY: number = 0;
 
-  
+  @HostListener('document:mousemove', ['$event'])
+  onMouseMove(event: MouseEvent): void {
+    if (this.isResizing) {
+      const deltaX = event.clientX - this.resizeStartX;
+      const deltaY = event.clientY - this.resizeStartY;
+
+      this.divWidth = this.initialWidth + deltaX;
+      this.divHeight = this.initialHeight + deltaY;
+    }
+  }
+
+  @HostListener('document:mouseup')
+  onMouseUp(): void {
+    if (this.isResizing) {
+      this.isResizing = false;
+    }
+  }
+
+  startResize(event: MouseEvent): void {
+    this.isResizing = true;
+    this.resizeStartX = event.clientX;
+    this.resizeStartY = event.clientY;
+    this.initialWidth = this.divWidth;
+    this.initialHeight = this.divHeight;
+  }
 }

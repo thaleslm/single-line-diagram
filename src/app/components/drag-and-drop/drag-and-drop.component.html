@@ -9,26 +9,38 @@
     [class]="item.class"
     cdkDrag
     [cdkDragFreeDragPosition]="item"
-
     (cdkDragEnded)="positions($event, item, i)"
   />
   <img
-    *ngFor="let element of GuardGrid; let i = index"
-    cdkDragBoundary=".example-boundary"
-    class="example-box"
-    style="position: absolute"
-    [src]="element.src"
-    [style.height.px]="element.height"
-    [style.width.px]="element.width"
-    cdkDrag
-    [class]="element.class"
-    [cdkDragFreeDragPosition]="element"
-    (cdkDragEnded)="guardPosition($event, element, i)"
+  
+   *ngFor="let element of GuardGrid; let i = index"
+      cdkDragBoundary=".example-boundary"
+      class="example-box"
+      style="position: absolute"
+      [src]="element.src"
+      [style.height.px]="element.height"
+      [style.width.px]="element.width"
+      cdkDrag
+      [class]="element.class"
+      [cdkDragFreeDragPosition]="element"
+      (cdkDragEnded)="guardPosition($event, element, i)"
     />
+
+    <!-- <span class="additional-element" *ngIf="showAdditionalElement" [style.left.px]="additionalElementLeft" [style.top.px]="additionalElementTop">
+      Elemento Adicional
+    </span> -->
+  
 </body>
 
-
-<button (click)="save()" >salvar</button>
+<div
+  class="resizeable-div"
+  [style.width.px]="divWidth"
+  [style.height.px]="divHeight"
+>
+  Conteúdo da div
+  <div class="resize-handle" (mousedown)="startResize($event)"></div>
+</div>
+<button (click)="save()">salvar</button>
 <button (click)="clear()">Limpar</button>
 
 <!-- <body class="example-boundary" >
