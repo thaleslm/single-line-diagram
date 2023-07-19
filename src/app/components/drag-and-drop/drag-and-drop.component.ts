@@ -18,14 +18,10 @@ interface ColumnItem {
   styleUrls: ['./drag-and-drop.component.css'],
 })
 export class DragAndDropComponent {
-  // dragPosition = { x: 15, y: 5 };
-  /**
-   *
-   */
+
   constructor(private renderer: Renderer2) {
     this.initializeElement();
-    // const adjustedX = savedX + deltaX;
-    // const adjustedY = savedY + deltaY;
+
   }
 
   gridItems: Array<any> = [
@@ -34,6 +30,8 @@ export class DragAndDropComponent {
       src: 'assets/genericLoad.svg',
       x: -300,
       y: 0,
+      defaultX: -300,
+      defaulty: 0,
       class:'x',
       height: 50,
       width: 50,
@@ -45,6 +43,8 @@ export class DragAndDropComponent {
       src: 'assets/transformer.svg',
       x: -180,
       y: 0,
+      defaultX: -180,
+      defaulty: 0,
       class:'x',
       height: 50,
       width: 50,
@@ -54,6 +54,9 @@ export class DragAndDropComponent {
       src: 'assets/exitPoint.svg',
       x: -120,
       y: 0,
+      defaultX: -120,
+      defaulty: 0,
+      
       class:'x',
       height: 50,
       width: 50,
@@ -63,6 +66,8 @@ export class DragAndDropComponent {
       src: 'assets/entryPoint.svg',
       x: -60,
       y: 0,
+      defaultX: -60,
+      defaulty: 0,
       class:'x',
       height: 50,
       width: 50,
@@ -72,6 +77,8 @@ export class DragAndDropComponent {
       src: 'assets/circuitBreaker.svg',
       x: 0,
       y: 0,
+      defaultX: 0,
+      defaulty: 0,
       class:'x',
       height: 50,
       width: 50,
@@ -83,6 +90,8 @@ export class DragAndDropComponent {
       src: 'assets/barra_horizontal.svg',
       x: 120,
       y: 20,
+      defaultX: 120,
+      defaulty: 20,
       class:'l ',
       height: 10,
       width: 50,
@@ -92,6 +101,8 @@ export class DragAndDropComponent {
       src: 'assets/barra_vertical.svg',
       x: 180,
       y: 0,
+      defaultX: 180,
+      defaulty: 0,
       class:'l',
       height: 51,
       width: 10,
@@ -101,6 +112,8 @@ export class DragAndDropComponent {
       src: 'assets/cabo_horizontal.svg',
       x: 240,
       y: 20,
+      defaultX: 240,
+      defaulty: 20,
       class:'l hori',
       height: 5,
       width: 50,
@@ -110,6 +123,8 @@ export class DragAndDropComponent {
       src: 'assets/cabo_vertical.svg',
       x: 300,
       y: 0,
+      defaultX: 300,
+      defaulty: 0,
       class:'l',
       height: 51,
       width: 10,
@@ -119,6 +134,8 @@ export class DragAndDropComponent {
       src: 'assets/cabo_L.svg',
       x: 340,
       y: 0,
+      defaultX: 340,
+      defaulty: 0,
       class:'l',
       height: 50,
       width: 50,
@@ -128,6 +145,7 @@ export class DragAndDropComponent {
   GuardGrid: Array<any> = [];
   changePosition() {}
   positions(event: CdkDragEnd, item: any, index: number) {
+    let ad = this.gridItems[index];
     const element = event.source.getRootElement();
     const boundingRect = element.getBoundingClientRect();
 
@@ -139,12 +157,15 @@ export class DragAndDropComponent {
 
     const deltaX = absoluteX - relativeX;
     const deltaY = absoluteY - relativeY;
+    this.gridItems[index] = {
+      x : item.defaultX,
+      y : item.defaulty,
+      ...item
+    }
 
-    this.gridItems[index] = item
     item.x = deltaX;
     item.y = deltaY;
-    this.GuardGrid.push(item);
-
+    this.GuardGrid.push(item)
     //adicionar na primeira posição do objeto o outro com o mesmo caminho
   }
 
@@ -189,31 +210,5 @@ export class DragAndDropComponent {
     window.localStorage.removeItem('gridItems');
   }
 
-  divHeight: number = 200;
-  private isResizing: boolean = false;
-  private initialHeight: number = 0;
-  private resizeStartY: number = 0;
-
-  startResize(event: MouseEvent): void {
-    this.isResizing = true;
-    this.resizeStartY = event.clientY;
-    this.initialHeight = this.divHeight;
-
-    document.addEventListener('mousemove', this.resize.bind(this));
-    document.addEventListener('mouseup', this.stopResize.bind(this));
-  }
-
-  resize(event: any): void {
-    if (!this.isResizing) return;
-
-    const deltaY = event.clientY - this.resizeStartY;
-
-    this.divHeight = this.initialHeight + deltaY;
-  }
-
-  stopResize(): void {
-    this.isResizing = false;
-    document.removeEventListener('mousemove', this.resize.bind(this));
-    document.removeEventListener('mouseup', this.stopResize.bind(this));
-  }
+  
 }

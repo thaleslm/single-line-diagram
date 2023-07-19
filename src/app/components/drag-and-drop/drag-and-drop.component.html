@@ -26,12 +26,7 @@
     (cdkDragEnded)="guardPosition($event, element, i)"
     />
 </body>
-<div class="resizeable-div" 
-     [style.height.px]="divHeight"
-     >
-  Conteúdo da div
-  <div class="resize-handle" ></div>
-</div>
+
 
 <button (click)="save()" >salvar</button>
 <button (click)="clear()">Limpar</button>
