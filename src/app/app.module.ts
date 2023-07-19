@@ -10,6 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { DragAndDropComponent } from './components/drag-and-drop/drag-and-drop.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +23,9 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     AppRoutingModule,
     BrowserAnimationsModule,
     MatDialogModule,
-    ReactiveFormsModule,DragDropModule
+    ReactiveFormsModule,
+    DragDropModule,
+    
     
   ],
   providers: [],

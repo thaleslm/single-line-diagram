@@ -1,6 +1,4 @@
 .example-box {
-  width: 50px;
-  height: 50px;
   border: solid 1px #ccc;
   color: rgba(0, 0, 0, 0.87);
   cursor: move;
@@ -8,13 +6,11 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  background: #fff;
   border-radius: 4px;
-  margin-right: 25px;
-  position: relative;
+  position: absolute;
+
   z-index: 1;
   box-sizing: border-box;
-  padding: 10px;
   transition: box-shadow 200ms cubic-bezier(0, 0, 0.2, 1);
   box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2),
               0 2px 2px 0 rgba(0, 0, 0, 0.14),
@@ -23,6 +19,31 @@
 
 }
 
+.horizontal{
+  background-color: transparent;
+  box-shadow: none;
+  border-radius: 0px;
+  border:none;
+}
+.vertical{
+
+  border:none;
+  background-color: transparent;
+  box-shadow: none;
+  border-radius: 0px;
+
+}
+.l{
+  border:none;
+  background-color: transparent;
+  box-shadow: none;
+  border-radius: 0px;
+  mix-blend-mode: multiply;
+
+}
+.hori{
+  background-color: #000;
+}
 .example-box:active {
   box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
               0 8px 10px 1px rgba(0, 0, 0, 0.14),
@@ -31,8 +52,32 @@
 .example-boundary {
   display: flex;
   justify-content: center;
-  width: 1000px;
-  height: 900px;
+  width: 100vw;
+  height: 97.8vh;
   max-width: 100%;
+  gap: 10px;
   border: dotted #ccc 2px;
+}
+.resizeable-div {
+  width: 200px;
+  height: 200px;
+  border: 1px solid black;
+  position: relative;
+  overflow: auto;
+  cursor: ns-resize;
+}
+
+.resize-handle {
+  width: 100%;
+  height: 10px;
+  background-color: #000;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  cursor: ns-resize;
+}
+.resizeable-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
