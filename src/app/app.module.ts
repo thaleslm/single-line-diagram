@@ -9,7 +9,7 @@ import { SelectComponent } from './components/modal/select/select.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DragAndDropComponent } from './components/drag-and-drop/drag-and-drop.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -25,8 +25,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     MatDialogModule,
     ReactiveFormsModule,
     DragDropModule,
-    
-    
+    DragDropModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

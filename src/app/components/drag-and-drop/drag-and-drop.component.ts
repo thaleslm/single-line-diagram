@@ -1,7 +1,15 @@
-import { Component, HostListener, OnInit, Renderer2 } from '@angular/core';
 import {
+  Component,
+  ElementRef,
+  HostListener,
+  OnInit,
+  Renderer2,
+} from '@angular/core';
+import {
+  CdkDrag,
   CdkDragDrop,
   CdkDragEnd,
+  DragDrop,
   moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
@@ -18,7 +26,11 @@ interface ColumnItem {
   styleUrls: ['./drag-and-drop.component.css'],
 })
 export class DragAndDropComponent {
-  constructor(private renderer: Renderer2) {
+  constructor(
+    private renderer: Renderer2,
+    private elementRef: ElementRef,
+    private dragDrop: DragDrop
+  ) {
     this.initializeElement();
   }
 
@@ -33,7 +45,7 @@ export class DragAndDropComponent {
       class: 'x',
       height: 50,
       width: 50,
-      name: '',
+      angle: 0,
     },
     {
       id: 1,
@@ -43,6 +55,7 @@ export class DragAndDropComponent {
       class: 'x',
       height: 50,
       width: 50,
+      angle: 0,
     },
     {
       id: 2,
@@ -54,7 +67,7 @@ export class DragAndDropComponent {
       class: 'x',
       height: 50,
       width: 50,
-      name: '',
+      angle: 0,
     },
     {
       id: 3,
@@ -67,7 +80,7 @@ export class DragAndDropComponent {
       class: 'x',
       height: 50,
       width: 50,
-      name: '',
+      angle: 0,
     },
     {
       id: 4,
@@ -79,7 +92,7 @@ export class DragAndDropComponent {
       class: 'x',
       height: 50,
       width: 50,
-      name: '',
+      angle: 0,
     },
     {
       id: 5,
@@ -91,7 +104,7 @@ export class DragAndDropComponent {
       class: 'x',
       height: 50,
       width: 50,
-      name: '',
+      angle: 0,
     },
     {
       id: 6,
@@ -101,7 +114,7 @@ export class DragAndDropComponent {
       class: 'x',
       height: 50,
       width: 50,
-      name: '',
+      angle: 0,
     },
     {
       id: 7,
@@ -110,11 +123,10 @@ export class DragAndDropComponent {
       y: 20,
       defaultX: 120,
       defaulty: 20,
-      class: 'l ',
+      class: 'l horizontal ',
       height: 10,
       width: 50,
-      name:''
-
+      angle: 0,
     },
     {
       id: 8,
@@ -123,11 +135,10 @@ export class DragAndDropComponent {
       y: 0,
       defaultX: 180,
       defaulty: 0,
-      class: 'l',
+      class: 'l horizontal',
       height: 51,
       width: 10,
-      name:''
-
+      angle: 0,
     },
     {
       id: 9,
@@ -139,8 +150,7 @@ export class DragAndDropComponent {
       class: 'l hori',
       height: 5,
       width: 50,
-      name:''
-
+      angle: 0,
     },
     {
       id: 10,
@@ -152,8 +162,7 @@ export class DragAndDropComponent {
       class: 'l',
       height: 51,
       width: 10,
-      name:''
-
+      angle: 0,
     },
     {
       id: 11,
@@ -165,19 +174,23 @@ export class DragAndDropComponent {
       class: 'l',
       height: 50,
       width: 50,
-      name:''
-
+      angle: 0,
     },
   ];
+  enableImageMovement: boolean = true;
+  firstELement: any;
 
-  showAdditionalElement: boolean = false;
-  additionalElementLeft: number = 0;
-  additionalElementTop: number = 0;
+  lock:string = "assets/open_lock.svg"
+  // showAdditionalElement: boolean = false;
+  // additionalElementLeft: number = 0;
+  // additionalElementTop: number = 0;
 
   GuardGrid: Array<any> = [];
   changePosition() {}
   positions(event: CdkDragEnd, item: any, index: number) {
-    let ad = this.gridItems[index];
+    if (!this.enableImageMovement) {
+      return;
+    }
     const element = event.source.getRootElement();
     const boundingRect = element.getBoundingClientRect();
 
@@ -197,45 +210,40 @@ export class DragAndDropComponent {
 
     item.x = deltaX;
     item.y = deltaY;
-    this.GuardGrid.push(item);
-    //adicionar na primeira posição do objeto o outro com o mesmo caminho
 
-    if(item.id < 7){
+    this.GuardGrid.push(item);
+    this.firstELement = item;
+    if (item.id > 6) {
       this.additionalElementLeft = relativeX + 52;
       this.additionalElementTop = relativeY + 20;
-  
-      this.showAdditionalElement = true;
 
+      this.showAdditionalElement = true;
     }
-    // Definir a posição do elemento adicional
   }
 
   guardPosition(event: CdkDragEnd, item: any, index: number) {
-    const element = event.source.getRootElement();
-    const boundingRect = element.getBoundingClientRect();
+    if (this.enableImageMovement == true) {
+      const element = event.source.getRootElement();
+      const boundingRect = element.getBoundingClientRect();
 
-    const relativeX = boundingRect.left;
-    const relativeY = boundingRect.top;
+      const relativeX = boundingRect.left;
+      const relativeY = boundingRect.top;
 
-    const absoluteX = event.source.getFreeDragPosition().x + relativeX;
-    const absoluteY = event.source.getFreeDragPosition().y + relativeY;
+      const absoluteX = event.source.getFreeDragPosition().x + relativeX;
+      const absoluteY = event.source.getFreeDragPosition().y + relativeY;
 
-    const deltaX = absoluteX - relativeX;
-    const deltaY = absoluteY - relativeY;
+      const deltaX = absoluteX - relativeX;
+      const deltaY = absoluteY - relativeY;
 
-    const gridX = Math.round(deltaX / 10) * 10; // Ajuste para o grid de 10 pixels
-    const gridY = Math.round(deltaY / 10) * 10; // Ajuste para o grid de 10 pixels
+      const gridX = Math.round(deltaX / 10) * 10; // Ajuste para o grid de 10 pixels
+      const gridY = Math.round(deltaY / 10) * 10; // Ajuste para o grid de 10 pixels
 
-    item.x = gridX;
-    item.y = gridY;
+      item.x = gridX;
+      item.y = gridY;
 
-    this.GuardGrid[index] = item;
-  }
-
-  @HostListener('window:resize', ['$event'])
-  onResize(event: any) {
-    event.target.innerWidth;
-    console.log('resize', event.target.innerWidth);
+      this.GuardGrid[index] = item;
+      this.firstELement = item;
+    }
   }
 
   initializeElement(): void {
@@ -250,37 +258,47 @@ export class DragAndDropComponent {
   clear() {
     window.localStorage.removeItem('gridItems');
   }
-  divWidth: number = 200;
-  divHeight: number = 200;
-  private isResizing: boolean = false;
-  private initialWidth: number = 0;
-  private initialHeight: number = 0;
-  private resizeStartX: number = 0;
-  private resizeStartY: number = 0;
+  toggleImageMovement() {
+    this.enableImageMovement = !this.enableImageMovement;
+    if(this.enableImageMovement) this.lock = "assets/open_lock.svg" 
+    if(!this.enableImageMovement) this.lock = "assets/closed_lock.svg"
+    this.save()
 
-  @HostListener('document:mousemove', ['$event'])
-  onMouseMove(event: MouseEvent): void {
-    if (this.isResizing) {
-      const deltaX = event.clientX - this.resizeStartX;
-      const deltaY = event.clientY - this.resizeStartY;
 
-      this.divWidth = this.initialWidth + deltaX;
-      this.divHeight = this.initialHeight + deltaY;
+  }
+  angle: number = 0;
+
+  rotateImage(index: number) {
+    if (!this.enableImageMovement && this.GuardGrid[index].id > 6) {
+      let angle = this.GuardGrid[index].angle + 90;
+      this.GuardGrid[index] = {
+        ...this.GuardGrid[index],
+        angle: angle,
+      };
+      this.save()
     }
   }
 
-  @HostListener('document:mouseup')
-  onMouseUp(): void {
-    if (this.isResizing) {
-      this.isResizing = false;
-    }
-  }
+  showAdditionalElement: boolean = false;
+  additionalElementLeft: number = 0;
+  additionalElementTop: number = 0;
 
-  startResize(event: MouseEvent): void {
-    this.isResizing = true;
-    this.resizeStartX = event.clientX;
-    this.resizeStartY = event.clientY;
-    this.initialWidth = this.divWidth;
-    this.initialHeight = this.divHeight;
+  // Método acionado em tempo de escrita (ao alterar o input)
+  inputWidth(event: Event) {
+    const inputElement = event.target as HTMLInputElement;
+    console.log(inputElement.value);
+    this.GuardGrid[this.GuardGrid.length - 1].width = inputElement.value;
+    this.save()
+
+  }
+  inputHeigth(event: Event) {
+    const inputElement = event.target as HTMLInputElement;
+    console.log(inputElement.value);
+    this.GuardGrid[this.GuardGrid.length - 1].height = inputElement.value;
+    this.save()
+
+  }
+  close(){
+    this.showAdditionalElement = !this.showAdditionalElement
   }
 }
