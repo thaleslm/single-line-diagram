@@ -32,11 +32,12 @@
       (click)="rotateImage(i)"
           />
 
-    <img [src]="lock" alt="" class="lock"  (click)="toggleImageMovement()">
-    <input class="additional-element" *ngIf="showAdditionalElement" [style.left.px]="additionalElementLeft" [style.top.px]="additionalElementTop" placeholder="largura" [value]="firstELement.width" (input)="inputWidth($event)" >
-    <input class="additional-element" *ngIf="showAdditionalElement" [style.left.px]="additionalElementLeft" [style.top.px]="additionalElementTop +25" placeholder="Altura" [value]="firstELement.width" (input)="inputHeigth($event)" >
-    <button class="additional-element button-close" *ngIf="showAdditionalElement" [style.left.px]="additionalElementLeft" [style.top.px]="additionalElementTop +50" (click)="close()" >pronto</button>
+    <img  [src]="lock" alt="" class="lock" (click)="toggleImageMovement()">
 
+    <input class="additional-element" type="number"  *ngIf="showAdditionalElementW" [style.left.px]="additionalElementLeft" [style.top.px]="additionalElementTop" placeholder="largura" [value]="firstELement.width" (input)="inputWidth($event)" >
+    <input class="additional-element" type="number" *ngIf="showAdditionalElementH" [style.left.px]="additionalElementLeft" [style.top.px]="additionalElementTop +25" placeholder="Altura" [value]="firstELement.height" (input)="inputHeigth($event)" >
+    <button class="additional-element button-close" *ngIf="showAdditionalElementW || showAdditionalElementH" [style.left.px]="additionalElementLeft" [style.top.px]="additionalElementTop +50" (click)="close()" >pronto</button>
+    <img src="assets/trash.svg" alt="" class="trash" *ngIf="trash" [style.left.px]="additionalElementLeft + 70" [style.top.px]="additionalElementTop + 50" (click)="removeItem()">
 
     <button (click)="save()" class="bookmarkBtn">
     <span class="IconContainer"> 

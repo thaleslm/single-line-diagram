@@ -13,7 +13,7 @@ import {
   moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
-import { Observable, fromEvent, map, startWith } from 'rxjs';
+import { Observable, concatMapTo, fromEvent, map, startWith } from 'rxjs';
 
 interface ColumnItem {
   svg: string;
@@ -180,7 +180,8 @@ export class DragAndDropComponent {
   enableImageMovement: boolean = true;
   firstELement: any;
 
-  lock:string = "assets/open_lock.svg"
+  lock: string = 'assets/open_lock.svg';
+  trash: boolean = false;
   // showAdditionalElement: boolean = false;
   // additionalElementLeft: number = 0;
   // additionalElementTop: number = 0;
@@ -191,6 +192,7 @@ export class DragAndDropComponent {
     if (!this.enableImageMovement) {
       return;
     }
+    this.close();
     const element = event.source.getRootElement();
     const boundingRect = element.getBoundingClientRect();
 
@@ -210,19 +212,40 @@ export class DragAndDropComponent {
 
     item.x = deltaX;
     item.y = deltaY;
+    // console.log(deltaX, deltaY);
 
-    this.GuardGrid.push(item);
-    this.firstELement = item;
-    if (item.id > 6) {
-      this.additionalElementLeft = relativeX + 52;
+    // if (deltaX > 900 && deltaY > 800) {
+    //   this.GuardGrid == null;
+    //   console.log('entrou');
+    // } else {
+    // }
+    this.additionalElementLeft = relativeX + 25;
+    this.additionalElementTop = relativeY - 10;
+
+    if (item.id == 7 || item.id == 9) {
+      this.additionalElementLeft = relativeX - 10;
       this.additionalElementTop = relativeY + 20;
 
-      this.showAdditionalElement = true;
+      this.showAdditionalElementW = true;
     }
+    if (item.id == 8 || item.id == 10) {
+      this.additionalElementLeft = relativeX + 25;
+      this.additionalElementTop = relativeY - 10;
+
+      this.showAdditionalElementH = true;
+    }
+
+    console.log(item);
+    this.GuardGrid.push(item);
+    this.firstELement = item;
+
+    this.trash = true;
+    this.firstELement = item;
   }
 
   guardPosition(event: CdkDragEnd, item: any, index: number) {
     if (this.enableImageMovement == true) {
+      this.close();
       const element = event.source.getRootElement();
       const boundingRect = element.getBoundingClientRect();
 
@@ -240,9 +263,16 @@ export class DragAndDropComponent {
 
       item.x = gridX;
       item.y = gridY;
+      this.additionalElementLeft = relativeX + 25;
+      this.additionalElementTop = relativeY - 10;
 
       this.GuardGrid[index] = item;
+      console.log(this.GuardGrid);
+      if (gridX > 900 && gridY > 800) {
+        this.GuardGrid.splice(index, 1);
+      }
       this.firstELement = item;
+      this.trash = true;
     }
   }
 
@@ -260,11 +290,9 @@ export class DragAndDropComponent {
   }
   toggleImageMovement() {
     this.enableImageMovement = !this.enableImageMovement;
-    if(this.enableImageMovement) this.lock = "assets/open_lock.svg" 
-    if(!this.enableImageMovement) this.lock = "assets/closed_lock.svg"
-    this.save()
-
-
+    if (this.enableImageMovement) this.lock = 'assets/open_lock.svg';
+    if (!this.enableImageMovement) this.lock = 'assets/closed_lock.svg';
+    this.save();
   }
   angle: number = 0;
 
@@ -275,30 +303,43 @@ export class DragAndDropComponent {
         ...this.GuardGrid[index],
         angle: angle,
       };
-      this.save()
+      this.save();
     }
   }
 
-  showAdditionalElement: boolean = false;
+  showAdditionalElementW: boolean = false;
+  showAdditionalElementH: boolean = false;
+
   additionalElementLeft: number = 0;
   additionalElementTop: number = 0;
 
   // Método acionado em tempo de escrita (ao alterar o input)
   inputWidth(event: Event) {
     const inputElement = event.target as HTMLInputElement;
-    console.log(inputElement.value);
-    this.GuardGrid[this.GuardGrid.length - 1].width = inputElement.value;
-    this.save()
-
+    if (inputElement.value.length < 4) {
+      this.GuardGrid[this.GuardGrid.length - 1].width = inputElement.value;
+      this.save();
+    }
   }
   inputHeigth(event: Event) {
     const inputElement = event.target as HTMLInputElement;
-    console.log(inputElement.value);
-    this.GuardGrid[this.GuardGrid.length - 1].height = inputElement.value;
-    this.save()
+    if (inputElement.value.length < 4) {
+      this.GuardGrid[this.GuardGrid.length - 1].height = inputElement.value;
 
+      this.save();
+    }
   }
-  close(){
-    this.showAdditionalElement = !this.showAdditionalElement
+  close() {
+    this.showAdditionalElementW = false;
+    this.showAdditionalElementH = false;
+    this.trash = false;
+  }
+  removeItem() {
+    this.GuardGrid.forEach((item,index) => {
+      if(item == this.firstELement) this.GuardGrid.splice(index, 1); 
+      return item
+    });
+    console.log(this.GuardGrid)
+    this.trash = false;
   }
 }
