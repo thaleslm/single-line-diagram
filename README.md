@@ -1,27 +1,27 @@
-# CricuitPrototyping
+# Unifilar Designer - Angular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.10.
+Este é um projeto em Angular para criação e edição de diagramas **unifilares** (diagramas elétricos de linha única), utilizando **Angular Material** e a funcionalidade de **drag and drop**. A aplicação permite arrastar e soltar componentes elétricos em uma área de desenho e conectá-los para formar um esquema lógico.
 
-## Development server
+## 🔧 Tecnologias Utilizadas
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- [Angular](https://angular.io/)
+- [Angular Material](https://material.angular.io/)
+- [CDK Drag and Drop](https://material.angular.io/cdk/drag-drop/overview)
+- TypeScript
+- SCSS
 
-## Code scaffolding
+## ⚙️ Instalação
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```bash
+# Clone o repositório
+git clone https://github.com/seu-usuario/unifilar-designer.git
 
-## Build
+# Acesse o diretório do projeto
+cd unifilar-designer
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+# Instale as dependências
+npm install
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+# Inicie o servidor de desenvolvimento
+ng serve
+****
