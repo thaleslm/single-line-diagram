@@ -1,27 +1,41 @@
-# Unifilar Designer - Angular
+# 🔌 Criador de Diagrama Unifilar (Arrastável)
 
-Este é um projeto em Angular para criação e edição de diagramas **unifilares** (diagramas elétricos de linha única), utilizando **Angular Material** e a funcionalidade de **drag and drop**. A aplicação permite arrastar e soltar componentes elétricos em uma área de desenho e conectá-los para formar um esquema lógico.
+Este é um projeto web desenvolvido com **Angular**, onde você pode **criar diagramas unifilares** com elementos visuais como quadrados, círculos, triângulos, imagens e conectá-los com linhas de forma interativa e intuitiva.
 
-## 🔧 Tecnologias Utilizadas
+---
+
+## 📽️ Demonstração em Vídeo
+
+[![Ver vídeo de demonstração](https://github.com/thaleslm/single-line-diagram/tree/main/public/video-apresentação.mp4)](https://github.com/thaleslm/single-line-diagram/tree/main/public/img-apresnetacao.png)
+
+> Clique na imagem para assistir ao vídeo no YouTube.
+
+---
+
+## ✨ Funcionalidades
+
+- ✅ Arraste elementos livremente dentro da área de desenho
+- ✅ Conecte elementos com linhas animadas
+- ✅ Ícones modernos com [Bootstrap Icons](https://icons.getbootstrap.com/)
+- ✅ Suporte a formatos: quadrado, círculo, triângulo, losango, estrela, imagem
+- ✅ Interface limpa e responsiva
+- ✅ Código modular e fácil de estender
+
+---
+
+## 🧱 Tecnologias Utilizadas
 
 - [Angular](https://angular.io/)
-- [Angular Material](https://material.angular.io/)
-- [CDK Drag and Drop](https://material.angular.io/cdk/drag-drop/overview)
-- TypeScript
-- SCSS
+- [Angular CDK DragDrop](https://material.angular.io/cdk/drag-drop/overview)
+- [Bootstrap Icons](https://icons.getbootstrap.com/)
+- HTML5, CSS3, TypeScript
 
-## ⚙️ Instalação
+---
+
+## 🚀 Como Rodar Localmente
+
+1. **Clone o repositório**
 
 ```bash
-# Clone o repositório
-git clone https://github.com/seu-usuario/unifilar-designer.git
-
-# Acesse o diretório do projeto
-cd unifilar-designer
-
-# Instale as dependências
-npm install
-
-# Inicie o servidor de desenvolvimento
-ng serve
-****
+git clone https://github.com/seu-usuario/seu-repo.git
+cd seu-repo
