@@ -6,7 +6,7 @@ Este é um projeto web desenvolvido com **Angular**, onde você pode **criar dia
 
 ## 📽️ Demonstração em Vídeo
 
-[![Ver vídeo de demonstração](https://raw.githubusercontent.com/thaleslm/single-line-diagram/main/public/img-apresentacao.png)](https://github.com/thaleslm/single-line-diagram/blob/main/public/video-apresentacao.mp4)
+[![Ver vídeo de demonstração](https://raw.githubusercontent.com/thaleslm/single-line-diagram/main/public/img-apresentacao.png)](https://raw.githubusercontent.com/thaleslm/single-line-diagram/main/public/video-apresentacao.mp4)
 
 > Clique na imagem para assistir ao vídeo.
 
